@@ -8,14 +8,14 @@ const isLoggedIn = async (req, res, next) => {
     if (!token) {
         return next(new AppError("Unauthenticated, please login again", 400))
     }
-
+    console.log(token)
     const userDetails = await jwt.verify(token, process.env.JWT_SECRET);
     req.user = userDetails;
 
     next();
 }
 
-// authorised roles
+// authorized roles
 const authorisedRoles = (...roles) => async (req, res, next) => {
     const currentUserRoles = req.user.role;
     if (!roles.includes(currentUserRoles)) {
@@ -30,7 +30,7 @@ const authorizeSubscriber = async (req, res, next) => {
     const subscriptionStatus = user.subscription.status;
     if (role !== 'ADMIN' && subscriptionStatus !== 'active') {
         return next(
-            new AppError('Please subscribce to access this route!', 403)
+            new AppError('Please subscribe to access this route!', 403)
         )
     }
 

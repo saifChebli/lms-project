@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 const router = Router();
 import { getAllCourses, getLecturesByCourseId, createCourse, updateCourse, removeCourse, addLectureToCourseById, deleteCourseLecture, updateCourseLecture } from '../controllers/course.controller.js'
 import { isLoggedIn, authorisedRoles, authorizeSubscriber } from "../middleware/auth.middleware.js";
